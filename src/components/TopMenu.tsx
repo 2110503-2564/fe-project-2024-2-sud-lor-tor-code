@@ -25,6 +25,7 @@ export default async function TopMenu() {
         <nav className="flex space-x-9 lg:space-x-12">
           <TopMenuItem title='Home' pageRef='/' />
           <TopMenuItem title='All Campground' pageRef='/campground' />
+          <TopMenuItem title='My Booking' pageRef='/mybooking' />
           <TopMenuItem title='Booking' pageRef='/booking' />
         </nav>
       </div>
