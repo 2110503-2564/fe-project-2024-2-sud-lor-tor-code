@@ -22,17 +22,8 @@ export default function Card({ campgroundName, imgSrc, rating, onRatingChange }:
 
     return (
         <InteractiveCard>
-            <div className='w-full h-[70%] relative rounded-t-lg'>
-                <Image 
-                    src={imgSrc}
-                    alt={`${campgroundName} image`}
-                    fill={true}
-                    className='object-cover rounded-t-lg'
-                    sizes="(max-width: 640px) 100vw, 50vw"
-                />
-            </div>
-            <div className='text-amber-800 font-medium text-lg h-[30%] p-2.5 bg-white'>
-                <div className='mb-3'>{campgroundName}</div>
+            <div className='text-amber-800 font-medium text-lg p-2.5 bg-white'>
+                <div>{campgroundName}</div>
                 {rating !== undefined && onRatingChange && (
                     <Rating
                         id={campgroundName}
