@@ -3,9 +3,9 @@ import Image from "next/image";
 
 export default async function CampgroundDetailPage(
     { params } :
-    { params: {vid:string}}
+    { params: {cid:string}}
 ) {
-    const campgroundDetail = await getCampground(params.vid);
+    const campgroundDetail = await getCampground(params.cid);
 
     return (
         <main className="text-center p-5">

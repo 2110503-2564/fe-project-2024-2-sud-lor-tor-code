@@ -90,7 +90,7 @@ const theme = createTheme({
 
 export default function Booking() {
   const urlParams = useSearchParams();
-  const vid = urlParams.get('id');
+  const cid = urlParams.get('id');
   const model = urlParams.get('model');
 
   const dispatch = useDispatch<AppDispatch>()
