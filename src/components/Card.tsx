@@ -6,12 +6,11 @@ import { Rating } from "@mui/material";
 
 type CardProps = {
     campgroundName: string;
-    imgSrc: string;
     rating?: number;
     onRatingChange?: (campgroundName: string, newRating: number) => void;
 };
 
-export default function Card({ campgroundName, imgSrc, rating, onRatingChange }: CardProps) {
+export default function Card({ campgroundName, rating, onRatingChange }: CardProps) {
 
     const handleRatingChange = (_event: React.SyntheticEvent, newValue: number | null) => {
         if (onRatingChange) {

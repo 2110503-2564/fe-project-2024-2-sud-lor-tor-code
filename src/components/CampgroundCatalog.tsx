@@ -14,16 +14,16 @@ export default async function CampgroundCatalog({campgroundsJson}: {campgroundsJ
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
                 {   
-                    campgroundsData.data.map((campground:CampgroundItem) => (
+                    campgroundsData.data.map((campground:CampgroundItem, index) => (
                         <Link 
-                            href={`/campground/${campground.id}`} 
+                            href={`/campground/${campground._id}`} 
                             className="transform transition-transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-opacity-50 rounded-lg" 
-                            key={campground.id}
+                            key={index}
                         >
+                            <h1>{campground._id}</h1>
                             <Card
                                 key={campground.name}
                                 campgroundName={campground.name}
-                                imgSrc={campground.picture}
                             />
                         </Link>
                     ))

@@ -26,7 +26,6 @@ export default async function TopMenu() {
           <TopMenuItem title='Home' pageRef='/' />
           <TopMenuItem title='All Campground' pageRef='/campground' />
           <TopMenuItem title='My Booking' pageRef='/mybooking' />
-          <TopMenuItem title='Booking' pageRef='/booking' />
         </nav>
       </div>
       

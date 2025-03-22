@@ -12,15 +12,12 @@ import {
   Typography,
   Container,
   Paper,
-  Snackbar,
-  Alert,
   SelectChangeEvent
 } from '@mui/material'
 import { useDispatch } from 'react-redux'
 import DateReserve from '@/components/DateReserve'
 import { AppDispatch } from '@/redux/store'
 import { Dayjs } from 'dayjs'
-import { useSearchParams } from 'next/navigation'
 import dayjs from 'dayjs'
 import { addBooking } from '@/redux/features/bookSlice'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
@@ -89,9 +86,6 @@ const theme = createTheme({
 })
 
 export default function Booking() {
-  const urlParams = useSearchParams();
-  const cid = urlParams.get('id');
-  const model = urlParams.get('model');
 
   const dispatch = useDispatch<AppDispatch>()
 

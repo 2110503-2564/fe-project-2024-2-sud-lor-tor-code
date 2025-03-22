@@ -6,10 +6,10 @@ interface CampgroundItem {
   province: string,
   postalcode: string,
   tel: string,
+  region: string,
   picture: string,
   dailyrate: number,
   __v: number,
-  id: string
 }
   
 interface CampgroundJson {
