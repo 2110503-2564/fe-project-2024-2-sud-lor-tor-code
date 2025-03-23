@@ -1,4 +1,4 @@
-import BookingCatalog from "@/components/BookingCatalog"
+import BookingList from "@/components/BookingList"
 import getBookings from "@/libs/bookingFunction/getBookings"
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/authOptions";
@@ -21,7 +21,7 @@ export default async function MyBooking() {
     return (
         <main>
             <Suspense fallback={<p>loading... <LinearProgress /></p>}>
-                <BookingCatalog bookingsJson={bookings}></BookingCatalog>
+                <BookingList bookingsJson={bookings} token={session.user.token}></BookingList>
             </Suspense>
         </main>
     );

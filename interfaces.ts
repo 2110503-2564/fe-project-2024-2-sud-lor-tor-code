@@ -9,7 +9,6 @@ interface CampgroundItem {
   region: string,
   picture: string,
   dailyrate: number,
-  __v: number,
 }
   
 interface CampgroundJson {
