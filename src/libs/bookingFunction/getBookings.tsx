@@ -3,6 +3,7 @@ export default async function getUserProfile(token: string) {
       "http://campway-api-ver-001.us-east-1.elasticbeanstalk.com/api/v1/bookings",
       {
         method: "GET",
+        mode: "cors",
         headers: {
           authorization: `Bearer ${token}`,
         },

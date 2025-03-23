@@ -3,9 +3,10 @@ import getCampground from "@/libs/campgroundFunction/getCampground";
 export default async function BookingList({ bookingsJson }: { bookingsJson: Promise<BookingJson> }) {
     const bookingsData: BookingJson = await bookingsJson;
     
+    console.log(bookingsData.data)
     const uniqueCampgroundIds = Array.from(new Set(
-        bookingsData.data?.filter(booking => booking?.campground?._id)
-            .map(booking => booking.campground._id) || []
+        bookingsData.data.filter(booking => booking?.campground?._id)
+            .map(booking => booking.campground?._id) || []
     ));
 
     const campgroundMap = uniqueCampgroundIds.length > 0 ? 

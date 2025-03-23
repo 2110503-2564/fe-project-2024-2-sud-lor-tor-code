@@ -3,20 +3,18 @@
 import React, { useState } from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { 
-    Box, 
-    TextField, 
-    Button, 
-    Typography,
-    Container,
-    Paper,
-    Snackbar,
-    Alert
+  Box, 
+  TextField, 
+  Button, 
+  Typography,
+  Container,
+  Paper,
+  Snackbar,
+  Alert 
 } from '@mui/material';
 import { createCampground } from '@/libs/campgroundFunction/postCampground';
 
-
 const theme = createTheme({
-  // Theme configuration remains the same
   palette: {
     primary: {
       main: '#B45309',
@@ -108,7 +106,6 @@ export default function CreateCampground({profile,token}:{profile:any,token:stri
   const [success, setSuccess] = useState(false);
   const [formattedDate, setFormattedDate] = useState('');
 
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({
@@ -122,7 +119,7 @@ export default function CreateCampground({profile,token}:{profile:any,token:stri
     setIsSubmitting(true);
     setError(null);
     try {
-      const campgroundData = {
+      const campgroundData:any = {
         name: formData.cname,
         address: formData.address,
         district:formData.district,
