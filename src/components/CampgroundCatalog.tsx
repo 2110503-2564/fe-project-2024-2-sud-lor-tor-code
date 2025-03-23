@@ -1,10 +1,14 @@
 import Link from "next/link";
 import Card from "./Card";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
 
 export default async function CampgroundCatalog({campgroundsJson}: {campgroundsJson:Promise<CampgroundJson>}) {
-
+    
     const campgroundsData:CampgroundJson = await campgroundsJson;
-
+    const session = await getServerSession(authOptions)
+        if(!session || !session.user.token) return null
+    
     return (
         <div className="my-2">
             <p className="text-lg text-gray-600 mb-8">
@@ -19,7 +23,10 @@ export default async function CampgroundCatalog({campgroundsJson}: {campgroundsJ
                             key={index}
                         >
                             <h1>{campground._id}</h1>
+                            
                             <Card
+                                token={session.user.token}
+                                id={campground._id as string}
                                 key={campground.name}
                                 campgroundName={campground.name}
                             />
