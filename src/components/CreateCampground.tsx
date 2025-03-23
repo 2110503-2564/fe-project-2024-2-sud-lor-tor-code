@@ -279,7 +279,6 @@ export default function CreateCampground({profile,token}:{profile:any,token:stri
                       label="Picture"
                       value={formData.picture}
                       onChange={handleChange}
-                      required
                     />
 
                     <TextField

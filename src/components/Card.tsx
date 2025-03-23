@@ -4,6 +4,7 @@ import Image from 'next/image';
 import InteractiveCard from './InteractiveCard';
 import { Rating } from "@mui/material";
 import Button from '@mui/material';
+import { useRouter } from "next/navigation";
 
 import { deleteCampground } from "@/libs/campgroundFunction/deleteCampground";
 
@@ -16,6 +17,8 @@ type CardProps = {
 };
 
 export default function Card({ campgroundName, rating, onRatingChange, id ,token}: CardProps) {
+
+    const router = useRouter();
 
     const handleRatingChange = (_event: React.SyntheticEvent, newValue: number | null) => {
         if (onRatingChange) {
@@ -44,6 +47,15 @@ export default function Card({ campgroundName, rating, onRatingChange, id ,token
                 >
                 Delete
                 </button>
+
+                <button className="bg-sky-600 hover:bg-indigo-600 hover:scale-105 text-white font-medium py-2 px-4 rounded-md shadow-md transition-transform duration-200 mt-4d"
+                onClick={(event) => {
+                    event.preventDefault(); 
+                    event.stopPropagation(); 
+                    router.push(`/campgroundinfo/${id}/update`)}}
+                >
+                Update
+                </button>;
 
                 {rating !== undefined && onRatingChange && (
                     <Rating
