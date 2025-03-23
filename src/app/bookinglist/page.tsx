@@ -8,7 +8,10 @@ import { LinearProgress } from "@mui/material";
 export default async function MyBooking() {
 
     const session = await getServerSession(authOptions);
-    if(!session || !session.user.token) return null;
+
+    if (!session || !session.user.token || session.user.role !== 'admin') {
+        return <p>You do not have permission to access this page.</p>;
+    }
 
     const bookings = await getBookings(session.user.token);
 
@@ -17,7 +20,6 @@ export default async function MyBooking() {
             <Suspense fallback={<p>loading... <LinearProgress /></p>}>
                 <BookingCatalog bookingsJson={bookings}></BookingCatalog>
             </Suspense>
-
         </main>
-    )
+    );
 }

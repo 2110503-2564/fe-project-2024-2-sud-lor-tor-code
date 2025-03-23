@@ -23,8 +23,8 @@ interface BookingItem {
   _id: string;
   fullname: string;
   tel: string;
-  campground: string;
-  bookDate: string;
+  campground: CampgroundItem;
+  bookingDate: Date;
   user: string;
   __v: number;
 }
