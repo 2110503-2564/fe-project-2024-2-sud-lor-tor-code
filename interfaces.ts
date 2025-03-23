@@ -34,3 +34,9 @@ interface BookingJson {
   pagination: Object,
   data: BookingItem[]
 }
+
+interface UserItem {
+  _id: string;
+  name: string;
+  email: string;
+}
