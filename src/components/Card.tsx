@@ -32,14 +32,19 @@ export default function Card({ campgroundName, rating, onRatingChange, id ,token
                 <button
                 className="bg-sky-600 hover:bg-indigo-600 hover:scale-105 text-white font-medium py-2 px-4 rounded-md shadow-md transition-transform duration-200 mt-4"
                 onClick={async (event) => {
-                    event.preventDefault();  // Prevent default behavior (useful for buttons inside forms or links)
+                    event.preventDefault();
                     event.stopPropagation();
+
+                    const isConfirmed = window.confirm("Are you sure you want to delete this campground?");
+                    if (!isConfirmed) return; // Stop execution if user cancels
+
                     await deleteCampground(id, token);
                     window.location.reload();
                 }}
                 >
                 Delete
                 </button>
+
                 {rating !== undefined && onRatingChange && (
                     <Rating
                         id={campgroundName}
