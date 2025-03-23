@@ -1,11 +1,6 @@
-interface CampgroundData {
-  name: string;
-  location: string;
-  description: string;
-  picture?: string;
-}
 
-export const createCampground = async (campgroundData: CampgroundData, token: string): Promise<any> => {
+
+export const createCampground = async (campgroundData: CampgroundItem, token: string): Promise<any> => {
   try {
     const response = await fetch(
       "http://campway-api-ver-001.us-east-1.elasticbeanstalk.com/api/v1/campgrounds",

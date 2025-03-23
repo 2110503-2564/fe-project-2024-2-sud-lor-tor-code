@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { 
     Box, 
@@ -13,6 +13,7 @@ import {
     Alert
 } from '@mui/material';
 import { createCampground } from '@/libs/campgroundFunction/postCampground';
+
 
 const theme = createTheme({
   // Theme configuration remains the same
@@ -90,7 +91,7 @@ interface FormData {
   dailyrate: string;
 }
 
-export default function CreateCampground({profile}:{profile:any}){
+export default function CreateCampground({profile,token}:{profile:any,token:string}){
   const [formData, setFormData] = useState<FormData>({
     cname: '',
     address: '',
@@ -106,14 +107,7 @@ export default function CreateCampground({profile}:{profile:any}){
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
   const [formattedDate, setFormattedDate] = useState('');
-  
-  // Handle the date formatting on client-side only to avoid hydration errors
-  useEffect(() => {
-    if (profile?.data?.createAt) {
-      // Use a specific format to ensure consistency
-      setFormattedDate((new Date(profile.data.createAt).toLocaleDateString('en-US'), 'MM/dd/yyyy'));
-    }
-  }, [profile?.data?.createAt]);
+
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -127,29 +121,22 @@ export default function CreateCampground({profile}:{profile:any}){
     event.preventDefault();
     setIsSubmitting(true);
     setError(null);
-
     try {
-      // Format the data for the API
       const campgroundData = {
         name: formData.cname,
-        location: `${formData.address}, ${formData.district}, ${formData.province}, ${formData.postalcode}`,
-        description: `Region: ${formData.region}, Contact: ${formData.tel}, Daily Rate: ${formData.dailyrate}`,
+        address: formData.address,
+        district:formData.district,
+        province:formData.province,
+        postalcode:formData.postalcode,
+        region: formData.region,
+        tel: formData.tel,
+        dailyrate: parseInt(formData.dailyrate),
         picture: formData.picture
       };
-
-      // Get the token - This should come from your authentication system
-      // For this example, I'll assume it's stored in localStorage or a similar mechanism
-      const token = localStorage.getItem('authToken') || '';
       
-      // If you're using a state management solution like Redux, you might get it from there
-      // const token = useSelector(state => state.auth.token);
-
-      // Call the API function with the token
       const result = await createCampground(campgroundData, token);
-      
       console.log("Campground created:", result);
       setSuccess(true);
-      
       // Reset form
       setFormData({
         cname: '',
@@ -207,7 +194,7 @@ export default function CreateCampground({profile}:{profile:any}){
                 <table className="table-auto border-separate border-spacing-2"><tbody>
                     <tr><td>Email</td><td>{profile?.data?.email}</td></tr>
                     <tr><td>Tel.</td><td>{profile?.data?.tel}</td></tr>
-                    <tr><td>Member Since</td><td>{formattedDate}</td></tr>
+                    <tr><td>Member Since</td><td>{new Date(profile?.data?.createAt).toLocaleDateString('en-GB')}</td></tr>
                 </tbody></table>
 
                 {

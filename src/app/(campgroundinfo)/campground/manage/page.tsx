@@ -9,7 +9,7 @@ export default async function ManagePage() {
 
     const profile = await getUserProfile(session.user.token)
     return(
-        <CreateCampground profile={profile}/>
+        <CreateCampground profile={profile} token={session.user.token}/>
     );
 
 }

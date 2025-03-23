@@ -1,5 +1,5 @@
 interface CampgroundItem {
-  _id: string,
+  _id?: string,
   name: string,
   address: string,
   district: string,
@@ -9,7 +9,7 @@ interface CampgroundItem {
   region: string,
   picture: string,
   dailyrate: number,
-  __v: number,
+  __v?: number,
 }
   
 interface CampgroundJson {
