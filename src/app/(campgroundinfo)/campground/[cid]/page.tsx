@@ -1,4 +1,4 @@
-import getCampground from "@/libs/getCampground";
+import getCampground from "@/libs/campgroundFunction/getCampground";
 import Image from "next/image";
 import Link from "next/link";
 

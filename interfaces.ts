@@ -20,8 +20,18 @@ interface CampgroundJson {
 }
 
 interface BookingItem {
-  nameLastname: string;
+  _id: string;
+  fullname: string;
   tel: string;
   campground: string;
   bookDate: string;
+  user: string;
+  __v: number;
+}
+
+interface BookingJson {
+  success: boolean,
+  count: number,
+  pagination: Object,
+  data: BookingItem[]
 }

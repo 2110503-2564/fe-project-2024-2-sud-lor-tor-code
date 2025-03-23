@@ -5,8 +5,6 @@ export default async function CampgroundCatalog({campgroundsJson}: {campgroundsJ
 
     const campgroundsData:CampgroundJson = await campgroundsJson;
 
-    console.log(campgroundsData)
-
     return (
         <div className="my-2">
             <p className="text-lg text-gray-600 mb-8">

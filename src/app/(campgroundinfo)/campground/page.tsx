@@ -1,5 +1,5 @@
 import { Suspense } from 'react';
-import getCampgrounds from "@/libs/getCampgrounds";
+import getCampgrounds from "@/libs/campgroundFunction/getCampgrounds";
 import CampgroundCatalog from "@/components/CampgroundCatalog";
 import { LinearProgress } from '@mui/material';
 

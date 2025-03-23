@@ -14,12 +14,9 @@ import {
   Paper,
   SelectChangeEvent
 } from '@mui/material'
-import { useDispatch } from 'react-redux'
 import DateReserve from '@/components/DateReserve'
-import { AppDispatch } from '@/redux/store'
 import { Dayjs } from 'dayjs'
 import dayjs from 'dayjs'
-import { addBooking } from '@/redux/features/bookSlice'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 
 const theme = createTheme({
@@ -87,20 +84,6 @@ const theme = createTheme({
 
 export default function Booking() {
 
-  const dispatch = useDispatch<AppDispatch>()
-
-  const makeBooking = () => {
-    if(bookDate) {
-      const item:BookingItem = {
-        nameLastname: nameLastname,
-        tel: contact,
-        campground: selectCampground,
-        bookDate: dayjs(bookDate).format("YYYY/MM/DD"),
-      }
-      dispatch(addBooking(item))
-    }
-  }
-
   const [nameLastname, setNameLastname] = useState<string>('');
   const [contact, setContact] = useState<string>('');
   const [selectCampground, setSelectCampground] = useState<string>('');
@@ -127,7 +110,6 @@ export default function Booking() {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    makeBooking();
   };
 
   return (
