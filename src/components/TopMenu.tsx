@@ -65,6 +65,7 @@ export default function TopMenu({ session }: { session: any }) {
             <TopMenuItem title='Home' pageRef='/' />
             <TopMenuItem title='All Campground' pageRef='/campground' />
             <TopMenuItem title='Booking List' pageRef='/bookinglist' />
+            <TopMenuItem title='My Bookings' pageRef='/my-booking' />
           </nav>
         </div>
         
@@ -124,6 +125,12 @@ export default function TopMenu({ session }: { session: any }) {
           <TopMenuItem 
             title='Booking List' 
             pageRef='/bookinglist' 
+            isMobile={true} 
+            onClick={handleMobileMenuItemClick} 
+          />
+          <TopMenuItem 
+            title='My Bookings' 
+            pageRef='/my-booking' 
             isMobile={true} 
             onClick={handleMobileMenuItemClick} 
           />
