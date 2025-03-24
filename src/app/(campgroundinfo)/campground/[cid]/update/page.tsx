@@ -16,9 +16,6 @@ export default async function UpdateCampgroundPage({ params }: { params: { cid: 
   return(
     <main>
       <UpdateCampground cid={cid} token={session.user.token} campground={campground.data}/>
-      {/* <div>
-        {campground.name}
-      </div> */}
     </main>
   );
 }

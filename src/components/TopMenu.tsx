@@ -85,7 +85,10 @@ export default function TopMenu({ session }: { session: any }) {
               <TopMenuItem title='Sign out' pageRef='/api/auth/signout' />
             </div>
           ) : (
+            <div className="flex items-center space-x-4">
             <TopMenuItem title='Sign in' pageRef='/api/auth/signin' />
+            <TopMenuItem title='Register' pageRef='/register' />
+            </div>
           )}
         </div>
         
