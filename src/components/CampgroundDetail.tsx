@@ -18,7 +18,7 @@ export default function CampgroundDetail({campgroundDetail}:{campgroundDetail:an
                 </div>
               </div>
               
-              <div className="md:col-span-8 md:pl-4">
+              <div className="md:col-span-8 md:pl-4 text-left">
                 <div className="flex mb-3">
                   <span className="w-28 text-amber-800 font-medium">Name:</span>
                   <span>{campgroundDetail.data.name}</span>
