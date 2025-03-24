@@ -52,10 +52,10 @@ export default function Card({ campgroundName, rating, onRatingChange, id ,token
                 onClick={(event) => {
                     event.preventDefault(); 
                     event.stopPropagation(); 
-                    router.push(`/campgroundinfo/${id}/update`)}}
+                    router.push(`/campground/${id}/update`)}}
                 >
                 Update
-                </button>;
+                </button>
 
                 {rating !== undefined && onRatingChange && (
                     <Rating
