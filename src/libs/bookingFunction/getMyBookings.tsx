@@ -1,6 +1,6 @@
-export default async function getUserProfile(token: string) {
+export default async function getMyBookings(token: string) {
     const response = await fetch(
-      "http://campway-api-project-fe.us-east-1.elasticbeanstalk.com/api/v1/bookings",
+      "http://campway-api-project-fe.us-east-1.elasticbeanstalk.com/api/v1/bookings/my-bookings",
       {
         method: "GET",
         mode: "cors",
@@ -11,7 +11,7 @@ export default async function getUserProfile(token: string) {
     );
   
     if (!response.ok) {
-      throw new Error("Cannot get all bookings");
+      throw new Error("Cannot get own bookings");
     }
   
     return await response.json();
