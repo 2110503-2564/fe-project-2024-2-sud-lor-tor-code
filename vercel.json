@@ -2,7 +2,7 @@
     "rewrites": [
       {
         "source": "/api/:path*",
-        "destination": "https://campway-api-project-fe.us-east-1.elasticbeanstalk.com/api/v1/:path*"
+        "destination": "http://campway-api-project-fe.us-east-1.elasticbeanstalk.com/api/v1/:path*"
       }
     ]
   }
