@@ -1,5 +1,4 @@
 import BookingList from "@/components/BookingList"
-import getBookings from "@/libs/bookingFunction/getBookings"
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/authOptions";
 import { Suspense } from "react";
@@ -16,12 +15,10 @@ export default async function MyBooking() {
         return <p>You do not have permission to access this page.</p>;
     }
 
-    const bookings = await getBookings(session.user.token);
-
     return (
         <main>
             <Suspense fallback={<p>loading... <LinearProgress /></p>}>
-                <BookingList bookingsJson={bookings} token={session.user.token}></BookingList>
+                <BookingList token={session.user.token}></BookingList>
             </Suspense>
         </main>
     );

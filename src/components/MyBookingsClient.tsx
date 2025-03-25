@@ -1,106 +1,32 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
-import getMyBookings from "@/libs/bookingFunction/getMyBookings";
-import getCampground from "@/libs/campgroundFunction/getCampground";
-import getCampgrounds from "@/libs/campgroundFunction/getCampgrounds";
-import { deleteBooking } from "@/libs/bookingFunction/delBooking";
-import { putBooking } from "@/libs/bookingFunction/putBooking";
+import { useState } from "react";
 import { Dayjs } from "dayjs";
 import DateReserve from "./DateReserve";
+import { deleteBooking } from "@/libs/bookingFunction/delBooking";
+import { putBooking } from "@/libs/bookingFunction/putBooking";
 
-export default function MyBookings({
+export default function MyBookingsClient({
   bookingsData,
+  campgroundsData,
   token,
 }: {
-  bookingsData: BookingJson;
+  bookingsData: BookingItem[];
+  campgroundsData: CampgroundItem[];
   token: string;
 }) {
-  const [bookings, setBookings] = useState<BookingItem[]>([]);
-  const [campgroundMap, setCampgroundMap] = useState<
-    Record<string, CampgroundItem>
-  >({});
+  const [bookings, setBookings] = useState<BookingItem[]>(bookingsData);
+  const [campgroundMap, setCampgroundMap] = useState<Record<string, CampgroundItem>>(
+    campgroundsData.reduce(
+      (acc: any, camp: any) => (camp._id ? { ...acc, [camp._id]: camp } : acc),
+      {}
+    )
+  );
   const [editingId, setEditingId] = useState<string | null>(null);
   const [bookDate, setBookDate] = useState<Dayjs | null>(null);
   const [editForm, setEditForm] = useState({ bookingDate: "", campground: "" });
-  const [allCampgrounds, setAllCampgrounds] = useState<CampgroundItem[]>([]);
+  const [allCampgrounds] = useState<CampgroundItem[]>(campgroundsData);
   const [snackbarMessage, setSnackbarMessage] = useState<string | null>(null);
-
-  useEffect(() => {
-    const fetchBookings = async () => {
-      try {
-        const response = await getMyBookings(token);
-        setBookings(response.data || []);
-      } catch (error) {
-        console.error("Error fetching bookings:", error);
-        showSnackbar("An error occurred while fetching bookings", true);
-      }
-    };
-
-    fetchBookings();
-  }, [token]);
-
-  useEffect(() => {
-    const fetchAllCampgrounds = async () => {
-      try {
-        const response = await getCampgrounds();
-        if (response?.data) {
-          setAllCampgrounds(response.data);
-
-          const map = response.data.reduce(
-            (acc: any, camp: any) =>
-              camp._id ? { ...acc, [camp._id]: camp } : acc,
-            {}
-          );
-
-          setCampgroundMap(map);
-        }
-      } catch (error) {
-        console.error("Error fetching campgrounds:", error);
-      }
-    };
-
-    fetchAllCampgrounds();
-  }, []);
-
-  useEffect(() => {
-    const fetchMissingCampgrounds = async () => {
-      const missingIds = Array.from(
-        new Set(
-          bookings
-            .map((booking) => booking.campground?._id)
-            .filter((id) => id && !campgroundMap[id])
-        )
-      );
-
-      if (missingIds.length > 0) {
-        const responses = await Promise.all(
-          missingIds.map((id) => getCampground(id))
-        );
-
-        setCampgroundMap((prev) => {
-          const newMap = { ...prev };
-          responses.forEach((res) => {
-            if (res?.data?._id) newMap[res.data._id] = res.data;
-          });
-          return newMap;
-        });
-      }
-    };
-
-    if (Object.keys(campgroundMap).length > 0) {
-      fetchMissingCampgrounds();
-    }
-  }, [bookings, campgroundMap]);
-
-  useEffect(() => {
-    if (bookDate?.format) {
-      setEditForm((prev) => ({
-        ...prev,
-        bookingDate: bookDate.format("YYYY-MM-DD"),
-      }));
-    }
-  }, [bookDate]);
 
   const formatDate = (date: Date | string) => {
     return new Date(date).toLocaleDateString("en-GB");
@@ -198,10 +124,10 @@ export default function MyBookings({
     setBookDate(null);
   };
 
-  const showSnackbar = useCallback((message: string, isError = false) => {
+  const showSnackbar = (message: string, isError = false) => {
     setSnackbarMessage(message);
     setTimeout(() => setSnackbarMessage(null), 3000);
-  }, []);
+  };
 
   const InfoRow = ({ label, value }: { label: string; value: string }) => (
     <div className="flex flex-wrap items-center gap-2">
