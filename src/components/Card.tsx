@@ -14,9 +14,10 @@ type CardProps = {
     onRatingChange?: (campgroundName: string, newRating: number) => void;
     id:string;
     token:string;
+    role:string;
 };
 
-export default function Card({ campgroundName, rating, onRatingChange, id ,token}: CardProps) {
+export default function Card({ campgroundName, rating, onRatingChange, id ,token,role}: CardProps) {
 
     const router = useRouter();
 
@@ -26,35 +27,41 @@ export default function Card({ campgroundName, rating, onRatingChange, id ,token
             onRatingChange(campgroundName, newRating);
         }
     };
-
+    //console.log(role)
     return (
         <InteractiveCard>
             <div className='text-amber-800 font-medium text-lg p-2.5 bg-white'>
                 <div>{campgroundName}</div>
-                
-                <button className="bg-amber-500 hover:bg-orange-500 hover:scale-105 text-white font-medium py-2 px-4 mx-2 rounded-md shadow-md transition-transform duration-200 mt-4d"
-                onClick={(event) => {
-                    event.preventDefault(); 
-                    event.stopPropagation(); 
-                    router.push(`/campground/${id}/update`)}}
-                >
-                Update
-                </button>
-                <button
-                className="bg-red-400 hover:bg-red-600 hover:scale-105 text-white font-medium py-2 px-4 mx-2 rounded-md shadow-md transition-transform duration-200 mt-4"
-                onClick={async (event) => {
-                    event.preventDefault();
-                    event.stopPropagation();
 
-                    const isConfirmed = window.confirm("Are you sure you want to delete this campground?");
-                    if (!isConfirmed) return; // Stop execution if user cancels
+                {role === "admin" && (
+                    <>
+                        <button
+                            className="bg-amber-500 hover:bg-orange-500 hover:scale-105 text-white font-medium py-2 px-4 mx-2 rounded-md shadow-md transition-transform duration-200 mt-4"
+                            onClick={(event) => {
+                                event.preventDefault();
+                                event.stopPropagation();
+                                router.push(`/campground/${id}/update`);
+                            }}
+                        >
+                            Update
+                        </button>
+                        <button
+                            className="bg-red-400 hover:bg-red-600 hover:scale-105 text-white font-medium py-2 px-4 mx-2 rounded-md shadow-md transition-transform duration-200 mt-4"
+                            onClick={async (event) => {
+                                event.preventDefault();
+                                event.stopPropagation();
 
-                    await deleteCampground(id, token);
-                    window.location.reload();
-                }}
-                >
-                Delete
-                </button>
+                                const isConfirmed = window.confirm("Are you sure you want to delete this campground?");
+                                if (!isConfirmed) return;
+
+                                await deleteCampground(id, token);
+                                window.location.reload();
+                            }}
+                        >
+                            Delete
+                        </button>
+                    </>
+                )}
 
                 {rating !== undefined && onRatingChange && (
                     <Rating

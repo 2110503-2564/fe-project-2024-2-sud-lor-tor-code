@@ -4,12 +4,15 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
+import getUserProfile from "@/libs/authFunction/getUserProfile";
 
 export default async function CampgroundCatalog({campgroundsJson}: {campgroundsJson:Promise<CampgroundJson>}) {
     
     const campgroundsData:CampgroundJson = await campgroundsJson;
     const session = await getServerSession(authOptions)
         if(!session || !session.user.token) return null
+
+    const profile = await getUserProfile(session.user.token)
     
     return (
         <div className="my-2">
@@ -31,11 +34,12 @@ export default async function CampgroundCatalog({campgroundsJson}: {campgroundsJ
                                 id={campground._id as string}
                                 key={campground.name}
                                 campgroundName={campground.name}
+                                role = {profile.data.role} 
                             />
                         </Link>
                     ))
                 }
-            </div>
+            </div>{profile.data.role==="admin"&&(
             <Link 
                 href="/campground/manage" 
                 className="fixed bottom-6 right-6 z-50"
@@ -48,6 +52,6 @@ export default async function CampgroundCatalog({campgroundsJson}: {campgroundsJ
                     <AddIcon />
                 </Fab>
             </Link>
-        </div>
+            )}</div>
     )
 }
