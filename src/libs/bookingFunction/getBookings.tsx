@@ -1,6 +1,6 @@
 export default async function getUserProfile(token: string) {
     const response = await fetch(
-      "/api/bookings",
+      "http://campway-api-project-fe.us-east-1.elasticbeanstalk.com/api/v1/bookings",
       {
         method: "GET",
         mode: "cors",

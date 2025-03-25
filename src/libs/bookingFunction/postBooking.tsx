@@ -1,7 +1,7 @@
 export const createBooking = async (campground_ID: string,bookingData:BookingItem, token: string): Promise<any> => {
   try {
     const response = await fetch(
-      `/api/campgrounds/${campground_ID}/bookings`,
+      `http://campway-api-project-fe.us-east-1.elasticbeanstalk.com/api/v1/campgrounds/${campground_ID}/bookings`,
       {
         method: "POST",
         mode: "cors",

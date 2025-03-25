@@ -1,7 +1,7 @@
 export const deleteBooking = async (booking_ID:string, token: string): Promise<any> => {
     try {
       const response = await fetch(
-        `/api/bookings/${booking_ID}`,
+        `http://campway-api-project-fe.us-east-1.elasticbeanstalk.com/api/v1/bookings/${booking_ID}`,
         {
           method: "DELETE",
           mode: "cors",

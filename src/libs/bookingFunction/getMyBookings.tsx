@@ -1,6 +1,6 @@
 export default async function getMyBookings(token: string) {
     const response = await fetch(
-      "/api/bookings/my-bookings",
+      "http://campway-api-project-fe.us-east-1.elasticbeanstalk.com/api/v1/bookings/my-bookings",
       {
         method: "GET",
         mode: "cors",
