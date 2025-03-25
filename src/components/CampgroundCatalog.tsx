@@ -5,6 +5,7 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 import getUserProfile from "@/libs/authFunction/getUserProfile";
+import CampgroundCreateAddButton from "./CamgroundCreateButton";
 
 export default async function CampgroundCatalog({campgroundsJson}: {campgroundsJson:Promise<CampgroundJson>}) {
     
@@ -40,18 +41,7 @@ export default async function CampgroundCatalog({campgroundsJson}: {campgroundsJ
                     ))
                 }
             </div>{profile.data.role==="admin"&&(
-            <Link 
-                href="/campground/manage" 
-                className="fixed bottom-6 right-6 z-50"
-            >
-                <Fab 
-                    color="primary" 
-                    aria-label="add" 
-                    className="bg-teal-700 hover:bg-teal-600 shadow-lg"
-                >
-                    <AddIcon />
-                </Fab>
-            </Link>
+                <CampgroundCreateAddButton/>
             )}</div>
     )
 }
