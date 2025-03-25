@@ -32,8 +32,16 @@ export default function Card({ campgroundName, rating, onRatingChange, id ,token
             <div className='text-amber-800 font-medium text-lg p-2.5 bg-white'>
                 <div>{campgroundName}</div>
                 
+                <button className="bg-amber-500 hover:bg-orange-500 hover:scale-105 text-white font-medium py-2 px-4 mx-2 rounded-md shadow-md transition-transform duration-200 mt-4d"
+                onClick={(event) => {
+                    event.preventDefault(); 
+                    event.stopPropagation(); 
+                    router.push(`/campground/${id}/update`)}}
+                >
+                Update
+                </button>
                 <button
-                className="bg-sky-600 hover:bg-indigo-600 hover:scale-105 text-white font-medium py-2 px-4 rounded-md shadow-md transition-transform duration-200 mt-4"
+                className="bg-red-400 hover:bg-red-600 hover:scale-105 text-white font-medium py-2 px-4 mx-2 rounded-md shadow-md transition-transform duration-200 mt-4"
                 onClick={async (event) => {
                     event.preventDefault();
                     event.stopPropagation();
@@ -46,15 +54,6 @@ export default function Card({ campgroundName, rating, onRatingChange, id ,token
                 }}
                 >
                 Delete
-                </button>
-
-                <button className="bg-sky-600 hover:bg-indigo-600 hover:scale-105 text-white font-medium py-2 px-4 rounded-md shadow-md transition-transform duration-200 mt-4d"
-                onClick={(event) => {
-                    event.preventDefault(); 
-                    event.stopPropagation(); 
-                    router.push(`/campground/${id}/update`)}}
-                >
-                Update
                 </button>
 
                 {rating !== undefined && onRatingChange && (

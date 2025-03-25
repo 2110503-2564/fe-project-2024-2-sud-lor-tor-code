@@ -2,6 +2,8 @@ import Link from "next/link";
 import Card from "./Card";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
+import Fab from '@mui/material/Fab';
+import AddIcon from '@mui/icons-material/Add';
 
 export default async function CampgroundCatalog({campgroundsJson}: {campgroundsJson:Promise<CampgroundJson>}) {
     
@@ -22,7 +24,7 @@ export default async function CampgroundCatalog({campgroundsJson}: {campgroundsJ
                             className="transform transition-transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-opacity-50 rounded-lg" 
                             key={index}
                         >
-                            <h1>{campground._id}</h1>
+                            {/* <h1>{campground._id}</h1> */}
                             
                             <Card
                                 token={session.user.token}
@@ -34,6 +36,18 @@ export default async function CampgroundCatalog({campgroundsJson}: {campgroundsJ
                     ))
                 }
             </div>
+            <Link 
+                href="/campground/manage" 
+                className="fixed bottom-6 right-6 z-50"
+            >
+                <Fab 
+                    color="primary" 
+                    aria-label="add" 
+                    className="bg-teal-700 hover:bg-teal-600 shadow-lg"
+                >
+                    <AddIcon />
+                </Fab>
+            </Link>
         </div>
     )
 }
