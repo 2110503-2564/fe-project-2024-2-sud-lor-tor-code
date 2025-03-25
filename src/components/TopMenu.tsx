@@ -6,10 +6,12 @@ import Link from 'next/link';
 
 export default function TopMenu({ 
   session, 
-  scrolled 
+  scrolled ,
+  role
 }: { 
   session: any, 
-  scrolled: boolean 
+  scrolled: boolean ,
+  role?:string
 }) {
   return (
     <>
@@ -39,12 +41,12 @@ export default function TopMenu({
             <TopMenuItem title='All Campground' pageRef='/campground' />
             
             {/* Conditionally render Booking List for admin */}
-            {session?.user?.role === 'admin' && (
+            {role === 'admin' && (
               <TopMenuItem title='Booking List' pageRef='/bookinglist' />
             )}
             
             {/* Conditionally render My Bookings for non-admin users */}
-            {session?.user?.role !== 'admin' && (
+            {role === 'user' && (
               <TopMenuItem title='My Bookings' pageRef='/my-booking' />
             )}
           </nav>

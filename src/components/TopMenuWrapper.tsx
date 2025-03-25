@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import TopMenu from './TopMenu';
 import MobileMenu from './MobileMenu';
 
-export default function TopMenuWrapper({ session }: { session: any }) {
+export default function TopMenuWrapper({ session,role }: { session: any,role?:string }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -30,11 +30,14 @@ export default function TopMenuWrapper({ session }: { session: any }) {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  
+
   return (
     <>
       <TopMenu 
         session={session} 
         scrolled={scrolled}
+        role={role}
       />
       <MobileMenu 
         session={session}

@@ -3,7 +3,7 @@
 export const createCampground = async (campgroundData: CampgroundItem, token: string): Promise<any> => {
   try {
     const response = await fetch(
-      "https://campway-api-project-fe.us-east-1.elasticbeanstalk.com/api/v1/campgrounds",
+      "/api/campgrounds",
       {
         method: "POST",
         mode: "cors",

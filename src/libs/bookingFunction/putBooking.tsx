@@ -8,7 +8,7 @@ export const putBooking = async (
   ): Promise<any> => {
     try {
       const response = await fetch(
-        `https://campway-api-project-fe.us-east-1.elasticbeanstalk.com/api/v1/bookings/${booking_ID}`,
+        `/api/bookings/${booking_ID}`,
         {
           method: "PUT",
           mode: "cors",

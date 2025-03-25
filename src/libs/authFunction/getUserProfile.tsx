@@ -1,6 +1,6 @@
 export default async function getUserProfile(token: string) {
   const response = await fetch(
-    "https://campway-api-project-fe.us-east-1.elasticbeanstalk.com/api/v1/auth/me",
+    "/api/auth/me",
     {
       method: "GET",
       headers: {

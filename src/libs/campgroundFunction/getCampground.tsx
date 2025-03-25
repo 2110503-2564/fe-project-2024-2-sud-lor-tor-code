@@ -3,7 +3,7 @@ export default async function getCampground(id: string) {
 
   try {
     const response = await fetch(
-      `https://campway-api-project-fe.us-east-1.elasticbeanstalk.com/api/v1/campgrounds/${id}`
+      `/api/campgrounds/${id}`
     );
     
     if (!response.ok) {
