@@ -251,7 +251,7 @@ export default function BookingListClient({
     <main className="bg-gray-50 min-h-screen p-4 sm:p-6">
       <div className="container mx-auto">
         <h1 className="text-2xl font-bold text-gray-800 mb-6 text-center">
-          Your Bookings
+          All Bookings
         </h1>
 
         {bookings.length > 0 ? (

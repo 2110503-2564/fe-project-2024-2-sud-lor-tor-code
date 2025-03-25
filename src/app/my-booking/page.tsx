@@ -1,24 +1,23 @@
 import MyBookings from "@/components/MyBookings";
+import getBookings from "@/libs/bookingFunction/getBookings"
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/authOptions";
 import { Suspense } from "react";
 import { LinearProgress } from "@mui/material";
 import getUserProfile from "@/libs/authFunction/getUserProfile";
+import getMyBookings from "@/libs/bookingFunction/getMyBookings";
 
 export default async function MyBooking() {
 
     const session = await getServerSession(authOptions);
     if(!session || !session.user.token) return null
-    const profile = await getUserProfile(session.user.token)
 
-    if (profile.data.role !== 'user') {
-        return <p>You do not have permission to access this page.</p>;
-    }
+    const bookings = await getMyBookings(session.user.token);
 
     return (
         <main>
             <Suspense fallback={<p>loading... <LinearProgress /></p>}>
-                <MyBookings token={session.user.token}></MyBookings>
+                <MyBookings bookingsJson={bookings} token={session.user.token}></MyBookings>
             </Suspense>
         </main>
     );
